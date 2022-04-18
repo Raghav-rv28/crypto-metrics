@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,15 +12,25 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import {nanoid} from 'nanoid'
-import { useGetCryptosQuery } from '../../services/cryptoAPI';
+import { useGetGlobalStatsQuery } from '../../services/cryptoAPI';
 import './index.scss'
 import millify from 'millify';
 
 const SearchAppBar = () => {  
-  const {data, isLoading,isFetching,error} = useGetCryptosQuery();
-  const globalStats = data?.data?.stats;
+  const {data, isLoading,isFetching,error} = useGetGlobalStatsQuery();
+  const globalStats = data?.data
+  
+  useEffect(() => {
+   tickersHeadings = [
+    `Total Coins: ${globalStats?.totalCoins.toLocaleString()}`,
+    `Total Exchanges: ${globalStats?.totalExchanges}`,
+    `Total Markets: ${globalStats?.totalMarkets.toLocaleString()}`,
+    `Total 24h Volume: ${millify(globalStats?.total24hVolume ? globalStats?.total24hVolume : 0,{precision: 2})}`,
+    `Total MarketCap: ${millify(globalStats?.totalMarketCap ? globalStats?.totalMarketCap : 0,{precision: 2})}`,
+    `BTC Dominance: ${globalStats?.btcDominance.toFixed(2)}` 
+  ]}, [data,isLoading,isFetching]);
 
-  const tickersHeadings = [
+  var tickersHeadings = [
     `Total Coins: ${globalStats?.totalCoins.toLocaleString()}`,
     `Total Exchanges: ${globalStats?.totalExchanges}`,
     `Total Markets: ${globalStats?.totalMarkets.toLocaleString()}`,
@@ -28,6 +38,7 @@ const SearchAppBar = () => {
     `Total MarketCap: ${millify(globalStats?.totalMarketCap ? globalStats?.totalMarketCap : 0,{precision: 2})}`,
     `BTC Dominance: ${globalStats?.btcDominance.toFixed(2)}` 
   ]
+
 
     const Ticker = (props) =>{
       return (

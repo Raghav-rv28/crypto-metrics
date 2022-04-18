@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid';
-import { useGetCryptosQuery  } from '../../services/cryptoAPI';
+import { useGetCryptosQuery, useGetGlobalStatsQuery  } from '../../services/cryptoAPI';
 import News from '../News';
 import CoinList from './CoinList'
 import './index.scss'
@@ -12,7 +12,8 @@ import millify from 'millify';
 
 export default function Home() {
 
-  const {data, isLoading, isFetching,error,isSuccess} = useGetCryptosQuery();
+  const {data, isLoading, isFetching,error} = useGetCryptosQuery();
+  const {data: statsData, isLoading: isLoadingStats, isFetching:isFetchingStats} = useGetGlobalStatsQuery();
   const coinsData = data?.data
 
   const columns = [
@@ -22,7 +23,7 @@ export default function Home() {
     {field:'marketCap' , headerName: 'Market Cap',width: 150, type: "number" ,valueFormatter: (params) => { return `${millify(params.value ? parseInt(params.value) : 0,{precision: 2})}`}},
     {field:'24hVolume' , headerName: '24 Hour Volume',width: 150,valueFormatter: (params) => { return `${millify(params.value ? parseInt(params.value) : 0,{precision: 2})}`}}
   ]
-  if (isLoading && isFetching) return <>Hello</>
+  if (isLoading && isFetching && isLoadingStats && isFetchingStats) return <>Hello</>
   if(error) {console.log(error)}
 
   return (
@@ -31,8 +32,8 @@ export default function Home() {
       <Grid >
         <Grid item mb={3} ml={5}> <News short/> </Grid>
         <Grid item container columnSpacing={1} marginX={0} direction="row" justifyContent="start" alignItems="center">
-            {coinsData?.stats?.bestCoins && <Grid item xs={12} md={6}><CoinList data = {coinsData?.stats} title = {"Latest Cryptocurrencies"} isLoading newest/></Grid>}
-            {coinsData?.stats?.bestCoins && <Grid item xs={12} md={6}><CoinList data = {coinsData?.stats} title = {"Trending Cryptocurrencies"} isLoading /></Grid>}
+            {statsData?.data?.bestCoins && <Grid item xs={12} md={6}><CoinList data = {statsData?.data} title = {"Latest Cryptocurrencies"} isLoading newest/></Grid>}
+            {statsData?.data?.bestCoins && <Grid item xs={12} md={6}><CoinList data = {statsData?.data} title = {"Trending Cryptocurrencies"} isLoading /></Grid>}
         </Grid>
         <Grid item>
           <Box sx={{marginTop: '3rem', width:'60vw',height: '75vw'}}>
