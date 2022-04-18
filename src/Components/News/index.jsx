@@ -17,8 +17,8 @@ function News({ short }) {
   const demoImage = "https://picsum.photos/300/150"
   const {data: newsList , isLoading ,error} = useGetCryptoNewsQuery({ newsCategory: newsType, count: short ? 3 : 10});
 
-  const {data: cryptoList, isLoading: isLoadingCoins} = useGetCryptosQuery();
-  const coinsData = cryptoList?.data?.coins
+  const {data, isLoading: isLoadingCoins} = useGetCryptosQuery();
+  const coinsData = data?.data?.coins
 
   if (isLoading && isLoadingCoins) return <div>Loading News</div>
   if(error) {
