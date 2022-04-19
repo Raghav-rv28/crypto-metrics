@@ -1,7 +1,7 @@
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import React, { useState } from 'react'
-import NewsCard from './NewsCard'
+import NewsCard from '../Common/NewsCard'
 import './data.json'
 import './index.scss'
 import { useGetCryptoNewsQuery } from '../../services/cryptoNewsApi';

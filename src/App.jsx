@@ -1,5 +1,5 @@
+import React from 'react'
 import {Route,Routes} from 'react-router-dom';
-import './App.scss';
 import Exchanges from './Components/Exchanges';
 import Home from './Components/Home';
 import PrimarySearchAppBar from './Components/Navbar';

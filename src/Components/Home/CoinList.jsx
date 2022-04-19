@@ -5,14 +5,16 @@ import ListItemText from '@mui/material/ListItemText';
 import { Typography } from '@mui/material';
 import Paper from '@mui/material/Paper'
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 const CoinList = (props) => {
-    const coinsData = (props.newest && (props.data?.newestCoins || props.data?.bestCoins)) ? props.data?.newestCoins : props.data?.bestCoins
+    const coinsData = (props.latest ? props.data?.newestCoins : props.data?.bestCoins)
 
   return (
     <Paper elevation={3}>
     <Typography pt={2} variant="h5" component="h5">
-        <LocalFireDepartmentIcon  sx={{ marginX: 1.3,marginTop:1,color: "#ff0000" }}/>{props.title}
+       { props.latest ? <LocalFireDepartmentIcon  sx={{ marginX: 1.3,marginTop:1,color: "#ff0000" }}/>: <AccessAlarmIcon  sx={{ marginX: 1.3,marginTop:1,color: "#fff300" }}/>}
+       {props.title}
     </Typography>
     <List sx={{ width: '100%', maxWidth: 240, bgcolor: 'background.paper' }}>
       <ListItem sx={{maxHeight: 24}} >
