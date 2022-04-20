@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/crypto-metrics/static/css/main.279be9aa.css",
-    "main.js": "/crypto-metrics/static/js/main.753657d1.js",
+    "main.js": "/crypto-metrics/static/js/main.80246c40.js",
     "static/media/revicons.eot": "/crypto-metrics/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "/crypto-metrics/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "/crypto-metrics/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/crypto-metrics/index.html",
     "main.279be9aa.css.map": "/crypto-metrics/static/css/main.279be9aa.css.map",
-    "main.753657d1.js.map": "/crypto-metrics/static/js/main.753657d1.js.map"
+    "main.80246c40.js.map": "/crypto-metrics/static/js/main.80246c40.js.map"
   },
   "entrypoints": [
     "static/css/main.279be9aa.css",
-    "static/js/main.753657d1.js"
+    "static/js/main.80246c40.js"
   ]
 }
