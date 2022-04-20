@@ -11,23 +11,24 @@ const CoinList = (props) => {
     const coinsData = (props.latest ? props.data?.newestCoins : props.data?.bestCoins)
 
   return (
-    <Paper elevation={3}>
-    <Typography pt={2} variant="h5" component="h5">
-       { props.latest ? <LocalFireDepartmentIcon  sx={{ marginX: 1.3,marginTop:1,color: "#ff0000" }}/>: <AccessAlarmIcon  sx={{ marginX: 1.3,marginTop:1,color: "#fff300" }}/>}
+    <Paper elevation={3} sx={{backgroundColor:'inherit'}}>
+    <Typography pt={1} pb={2} variant="h5" component="h5">
+       { props.latest ? <LocalFireDepartmentIcon  sx={{ marginX: 2 ,transform: 'translateY(0.3rem)',color: "#ff0000"}}/>: <AccessAlarmIcon  sx={{marginX: 2 ,transform: 'translateY(0.3rem)',color: "#ff0000", color: "purple" }}/>}
        {props.title}
     </Typography>
-    <List sx={{ width: '100%', maxWidth: 240, bgcolor: 'background.paper' }}>
-      <ListItem sx={{maxHeight: 24}} >
+    <List sx={{ width: '100%', maxWidth: 240, ml:3 }}>
+      <ListItem sx={{maxHeight: 36}} >
           <img className="coin-logo" src={coinsData[0]?.iconUrl} alt="" />
-          <ListItemText sx={{marginLeft: 2}} primary={coinsData[0]?.name} />
+          
+          <ListItemText sx={{marginLeft: 2}} primary={coinsData[0]?.name} secondary={coinsData[0]?.symbol} />
       </ListItem>
       <ListItem>
           <img className="coin-logo" src={coinsData[1]?.iconUrl} alt="" />
-          <ListItemText sx={{marginLeft: 2}} primary={coinsData[1]?.name} />
+          <ListItemText sx={{marginLeft: 2}} primary={coinsData[1]?.name} secondary={coinsData[1]?.symbol}/>
       </ListItem>
       <ListItem>
           <img className="coin-logo" src={coinsData[2]?.iconUrl} alt="" />
-          <ListItemText sx={{marginLeft: 2}} primary={coinsData[1]?.name} />
+          <ListItemText sx={{marginLeft: 2}} primary={coinsData[1]?.name} secondary={coinsData[2]?.symbol}/>
       </ListItem>
     </List>
     </Paper>

@@ -3,7 +3,14 @@ a{
     text-decoration: none;
 }
 .news{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     margin-top: 5vh;
+    #simple-select-label{
+        font-size: 1.2rem;
+        transform: translateY(-1.5rem);
+    }
     .news-image{
         max-width: 100px;
         max-height: 100px;

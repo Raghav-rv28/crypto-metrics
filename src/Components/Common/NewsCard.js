@@ -5,10 +5,10 @@ import Avatar from '@mui/material/Avatar';
 import moment from 'moment';
 const NewsCard = (props) => {
   return (
-    <Grid item xs={3.5}>
+    <Grid item xs={4}>
       <div className= "news-card">
       <a href={props.url} target="_blank" rel="noreferrer">
-        <Paper elevation={3}>
+        <Paper elevation={3} sx={{backgroundColor:'inherit'}}>
         <Box padding={2} sx={{
           display : 'flex',
           flexDirection: 'row',

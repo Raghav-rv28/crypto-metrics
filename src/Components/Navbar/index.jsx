@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,20 +15,16 @@ import {nanoid} from 'nanoid'
 import { useGetGlobalStatsQuery } from '../../services/cryptoAPI';
 import './index.scss'
 import millify from 'millify';
+import BounceLoader from 'react-spinners/ClipLoader';
+import { css } from "@emotion/react";
 
 const SearchAppBar = () => {  
   const {data, isLoading,isFetching,error} = useGetGlobalStatsQuery();
+  const [query, setQuery] = useState("bitcoin")
   const globalStats = data?.data
+  // const {data: searchResults, isLoading: isLoadingSearch, isFetching: isFetchingSearch} = useGetSearchResultsQuery(query)
   
-  useEffect(() => {
-   tickersHeadings = [
-    `Total Coins: ${globalStats?.totalCoins.toLocaleString()}`,
-    `Total Exchanges: ${globalStats?.totalExchanges}`,
-    `Total Markets: ${globalStats?.totalMarkets.toLocaleString()}`,
-    `Total 24h Volume: ${millify(globalStats?.total24hVolume ? globalStats?.total24hVolume : 0,{precision: 2})}`,
-    `Total MarketCap: ${millify(globalStats?.totalMarketCap ? globalStats?.totalMarketCap : 0,{precision: 2})}`,
-    `BTC Dominance: ${globalStats?.btcDominance.toFixed(2)}` 
-  ]}, [data,isLoading,isFetching]);
+  // console.log(searchResults)
 
   var tickersHeadings = [
     `Total Coins: ${globalStats?.totalCoins.toLocaleString()}`,
@@ -45,6 +41,12 @@ const SearchAppBar = () => {
         <div className="ticker__item">{props.heading}
           </div>)
   }
+
+  const override = css`
+  display: block;
+  margin: auto auto;
+  border-color: red;
+`;
 
 
   const [PageTitle,setPageTitle] = React.useState("CryptoMetrics");
@@ -101,22 +103,24 @@ const SearchAppBar = () => {
     },
   }));
 
-
-  if(isLoading && isFetching) return <>Loading</>
+//&& isLoadingSearch && isFetchingSearch
+  if(isLoading && isFetching ) return <BounceLoader css={override} size={100} color={'#111'} isLoading/>
   if(error) {console.log(error)}
   
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1}}  >
+      <AppBar position="static" color="secondary">
         <Toolbar>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
+            >
+            <NavLink to="/">
             {PageTitle}
+            </NavLink>
           </Typography>
           <Search>
             <SearchIconWrapper>

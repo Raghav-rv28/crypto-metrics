@@ -10,7 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-let news = require('./data.json')
+import BounceLoader from 'react-spinners/ClipLoader';
+import { css } from "@emotion/react";
+
 
 function News({ short }) {
   const [newsType, setnewsType] = React.useState('Cryptocurrency');
@@ -20,7 +22,12 @@ function News({ short }) {
   const {data, isLoading: isLoadingCoins} = useGetCryptosQuery();
   const coinsData = data?.data?.coins
 
-  if (isLoading && isLoadingCoins) return <div>Loading News</div>
+  const override = css`
+  display: block;
+  margin: auto auto;
+  border-color: red;
+`;
+  if (isLoading && isLoadingCoins) return <BounceLoader css={override} size={100} color={'#111'} isLoading/>
   if(error) {
     console.log(error)
   }
@@ -32,7 +39,11 @@ function News({ short }) {
   return (
     <Container maxWidth="lg">
     <div className="news">
-          {!short && <FormControl fullWidth>
+          {!short && <FormControl sx={{ 
+            maxWidth: 300,
+            marginY: 5,
+            border: 2
+          }} className="selector">
             <InputLabel id="simple-select-label">Select a Crypto</InputLabel>
               <Select
                   labelId="simple-select-label"

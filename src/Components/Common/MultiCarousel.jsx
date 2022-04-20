@@ -5,7 +5,8 @@ import React, { Fragment } from "react";
 import Carousel from "react-multi-carousel";
 import { useGetCryptoNewsQuery } from '../../services/cryptoNewsApi';
 import NewsCard from './NewsCard';
-
+import BounceLoader from 'react-spinners/ClipLoader';
+import { css } from "@emotion/react";
 const demoImage = "https://picsum.photos/300/150"
 
 
@@ -26,9 +27,16 @@ const responsive = {
       paritialVisibilityGutter: 30
     }
   };
+
 const Simple = ({ deviceType }) => {
+  const override = css`
+  display: block;
+  margin: auto auto;
+  border-color: red;
+`;
+
   const {data: newsList , isLoading: isLoadingNews ,isFetching:isFetchingNews} = useGetCryptoNewsQuery({ newsCategory: "Cryptocurrency", count: 10});
-  if( isLoadingNews && isFetchingNews) return <>Loading</>
+  if( isLoadingNews && isFetchingNews) <BounceLoader css={override} size={100} color={'#111'} isLoadingNews/>
     return (
       <Carousel
         ssr

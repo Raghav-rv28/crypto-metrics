@@ -6,8 +6,14 @@ import PrimarySearchAppBar from './Components/Navbar';
 import News from './Components/News';
 import Cryptocurrencies from './Components/Cryptocurrencies';
 import Cryptodetails from './Components/Cryptodetails';
+import { createMuiTheme, ThemeProvider } from '@mui/material';
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+const theme = createMuiTheme({
+  
+})
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <PrimarySearchAppBar />
       <Routes>
@@ -18,6 +24,7 @@ function App() {
         <Route path='News' element={<News/>} />
     </Routes>
     </div>
+    </ThemeProvider>
   );
 }
 
